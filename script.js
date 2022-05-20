@@ -1,11 +1,25 @@
-var student ={};
+var student ={}
 student.name ='คุณลุง'
 student.username = 'a@b.com'
 student.gender ='ชาย'
-// console.log(student.name)
-// document.getElementById('output').innerText = student;
 
-function addTable(index, student) {
+var secondStudent ={}
+secondStudent.name ='ไอโอ'
+secondStudent.username = 'IO@b.com'
+secondStudent.gender ='ชาย'
+
+var students =[
+    student,
+    secondStudent,
+    {
+        name :'วิด',
+        username : 'IO@b.com',
+        gender :'ชาย'
+    }
+    
+]
+
+function addTable(index, IP) {
     const tableBody = document.getElementById('tableBody')
     let row = document.createElement('tr')
     let cell = document.createElement('th')
@@ -13,18 +27,24 @@ function addTable(index, student) {
     cell.innerHTML = index
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.name
+    cell.innerHTML = IP.name
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.username
+    cell.innerHTML = IP.username
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.gender
+    cell.innerHTML = IP.gender
     row.appendChild(cell)
     tableBody.appendChild(row)
 }
  
-window.addEventListener("load",function(e) {
+
+function addStudentList(StudentList){
     let counter = 1
-    addTable(counter,student)
+    for (student of StudentList){
+        addTable(counter++,student)
+    }
+}
+window.addEventListener("load",function(e) {
+    addStudentList(students)
 })
