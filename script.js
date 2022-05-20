@@ -1,14 +1,16 @@
-var student ={}
+let student ={};
+student.name = 'คุณลุง'
 student.name ='คุณลุง'
 student.username = 'a@b.com'
 student.gender ='ชาย'
 
-var secondStudent ={}
+
+let secondStudent ={}
 secondStudent.name ='ไอโอ'
 secondStudent.username = 'IO@b.com'
 secondStudent.gender ='ชาย'
 
-var students =[
+let students =[
     student,
     secondStudent,
     {
@@ -37,10 +39,10 @@ function addTable(index, IP) {
     row.appendChild(cell)
     tableBody.appendChild(row)
 }
- 
 
 function addStudentList(StudentList){
     let counter = 1
+    addTable(counter,student)
     for (student of StudentList){
         addTable(counter++,student)
     }
@@ -48,3 +50,14 @@ function addStudentList(StudentList){
 window.addEventListener("load",function(e) {
     addStudentList(students)
 })
+
+
+function onLoad() {
+    
+    fetch('asset/students.json').then(response => {
+        return response.json()
+    })
+        .then(data =>{
+            console.log(data);
+        })
+}
