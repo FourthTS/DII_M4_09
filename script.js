@@ -1,63 +1,40 @@
-let student ={};
-student.name = 'คุณลุง'
-student.name ='คุณลุง'
-student.username = 'a@b.com'
-student.gender ='ชาย'
-
-
-let secondStudent ={}
-secondStudent.name ='ไอโอ'
-secondStudent.username = 'IO@b.com'
-secondStudent.gender ='ชาย'
-
-let students =[
-    student,
-    secondStudent,
-    {
-        name :'วิด',
-        username : 'IO@b.com',
-        gender :'ชาย'
+function onLoad() {
+    fetch('./asset/students2.json').then(response => {
+        return response.json()
+    }).then(data => {
+        let students = data
+        console.log(data)
+        addStudentList(students)
+    })
+}
+function addStudentList(studentList) {
+    let counter = 1
+    for (student of studentList) {
+        addStudentToTable(counter++, student)
     }
-    
-]
+}
 
-function addTable(index, IP) {
+function addStudentToTable(index, student) {
     const tableBody = document.getElementById('tableBody')
     let row = document.createElement('tr')
     let cell = document.createElement('th')
-    cell.setAttribute('scope','row')
+    cell.setAttribute('scope', 'row')
     cell.innerHTML = index
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = IP.name
+    cell.innerHTML = student.name
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = IP.username
+    // cell.innerHTML = student.username
+    let someDiv = document.createElement('div')
+    cell.appendChild(someDiv)
+    let imgElem = document.createElement('img')
+    someDiv.appendChild(imgElem)
+    imgElem.setAttribute('src', student.imageLink)
+    imgElem.style.width = '150px'
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = IP.gender
+    cell.innerHTML = student.gender
     row.appendChild(cell)
     tableBody.appendChild(row)
-}
-
-function addStudentList(StudentList){
-    let counter = 1
-    addTable(counter,student)
-    for (student of StudentList){
-        addTable(counter++,student)
-    }
-}
-window.addEventListener("load",function(e) {
-    addStudentList(students)
-})
-
-
-function onLoad() {
-    
-    fetch('asset/students.json').then(response => {
-        return response.json()
-    })
-        .then(data =>{
-            console.log(data);
-        })
 }
