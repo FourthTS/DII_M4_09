@@ -33,7 +33,7 @@ function addStudentToTable(index, student) {
     imgElem.style.width = '150px'
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.gender
+    cell.innerHTML = student.description
     row.appendChild(cell)
     tableBody.appendChild(row)
 }
