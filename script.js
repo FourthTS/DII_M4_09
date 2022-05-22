@@ -1,5 +1,5 @@
 function onLoad() {
-    fetch('./asset/students2.json').then(response => {
+    fetch('https://dv-student-backend-2019.appspot.com/students').then(response => {
         return response.json()
     }).then(data => {
         let students = data
@@ -22,15 +22,14 @@ function addStudentToTable(index, student) {
     cell.innerHTML = index
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.name
+    cell.innerHTML = `${student.name} ${student.surname}`
     row.appendChild(cell)
     cell = document.createElement('td')
-    // cell.innerHTML = student.username
     let someDiv = document.createElement('div')
     cell.appendChild(someDiv)
     let imgElem = document.createElement('img')
     someDiv.appendChild(imgElem)
-    imgElem.setAttribute('src', student.imageLink)
+    imgElem.setAttribute('src', student.image)
     imgElem.style.width = '150px'
     row.appendChild(cell)
     cell = document.createElement('td')
