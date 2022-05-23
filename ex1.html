@@ -22,11 +22,13 @@
         </svg>
       </a>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-        <li><a href="#" class="nav-link px-2 link-secondary">Overview</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Inventory</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Customers</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark">Products</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark " id="allStudentMenu" >รายชื่อทั้งหมด</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark "  id="searchMenu" >ค้นหา</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark "  id="addStudentMenu" >เพิ่มนักศึกษา</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark ">Products</a></li>
       </ul>
+      
+      
       <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
         <input type="search" class="form-control" placeholder="Search..." aria-label="Search" id="inputText">
       </form>
@@ -87,11 +89,11 @@
       </div>
     </form>
   </div>
-  <div class="output container">
+  <div class="outputB container">
  
  
  
-    <div>
+    <div id="output">
     <table class="container">
       <thead>
         <tr>
@@ -128,7 +130,7 @@
         <div class="col-3" id="gpa">gpa</div>
     </div>
     <div class="row">
-        <div class="col-3"><b>Id:</b></div>
+        <div class="col-3"><b>Image :</b></div>
         <div class="col">
             <img src="" id="image" />
         </div>
@@ -138,33 +140,35 @@
 
 
 
-
-<div class="container d-flex justify-content-center my-3">
-  <form class="row gy-2 gx-3 align-items-center" >
-  <div class="form-floating">
-    <input type="text" class="form-control" id="nameInput" placeholder="ชื่อ">
-    <label for="nameInput">Name</label>
+<div id="addUserDetail">
+  <div class="container d-flex justify-content-center my-3">
+    <form class="row gy-2 gx-3 align-items-center" >
+    <div class="form-floating">
+      <input type="text" class="form-control" id="nameInput" placeholder="ชื่อ">
+      <label for="nameInput">Name</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="surnameInput" placeholder="นามสกุล">
+      <label for="surnameInput">Surname</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="studentIdInput" placeholder="รหัสนักศึกษา">
+      <label for="studentIdInput">Student ID</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="gpaInput" placeholder="gpa">
+      <label for="gpaInput">GPA</label>
+    </div>
+    <div class="form-floating">
+      <input type="text" class="form-control" id="imageLinkInput" placeholder="image Link">
+      <label for="imgeLinkInput">Link Photo</label>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-primary" id="addButton">Submit</button>
+    </div>
+    </form>
   </div>
-  <div class="form-floating">
-    <input type="text" class="form-control" id="surnameInput" placeholder="นามสกุล">
-    <label for="surnameInput">Surname</label>
-  </div>
-  <div class="form-floating">
-    <input type="text" class="form-control" id="studentIdInput" placeholder="รหัสนักศึกษา">
-    <label for="studentIdInput">Student ID</label>
-  </div>
-  <div class="form-floating">
-    <input type="text" class="form-control" id="gpaInput" placeholder="gpa">
-    <label for="gpaInput">GPA</label>
-  </div>
-  <div class="form-floating">
-    <input type="text" class="form-control" id="imageLinkInput" placeholder="image Link">
-    <label for="imgeLinkInput">Link Photo</label>
-  </div>
-  <div class="col-auto">
-    <button type="button" class="btn btn-primary" id="addButton">Submit</button>
-  </div>
-  </form>
+  
 </div>
 
 

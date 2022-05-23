@@ -5,17 +5,18 @@
 //         let students = data
 //         addStudentList(students)
 //     })
-// }
-function onLoad(){
-    // student = {
+// 
+// student = {
     //     name: "Fourth",
     //     surname : "Tanachard",
     //     studentId : "642110317",
     //     gpa:"1.00",
     //     image:"https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-1/264617009_3104370826486387_8707539062872234591_n.jpg?stp=dst-jpg_p320x320&_nc_cat=101&ccb=1-7&_nc_sid=7206a8&_nc_eui2=AeFx-TQLL4UjG2LLTOjxxSaAEbWKivqOfoMRtYqK-o5-g_h8fyQtp85dFE_5WufW9wzROzi3l1z9U89oKXwyuh72&_nc_ohc=jF_C8aVJt3YAX8jU5wV&_nc_ht=scontent.fbkk10-1.fna&oh=00_AT9SatLS2IntOz0x25q40EDfutLs2_F-BwkvxRppKX7CCQ&oe=62901B55"
     // }
-    //     deleteStudent()
-        showAllStudent()
+    //     deleteStudent()}
+function onLoad(){
+    
+        hideAll()
 }
 function showAllStudent(){
     fetch('https://dv-student-backend-2019.appspot.com/students')
@@ -36,6 +37,8 @@ function onAddStudentClick() {
 }
 function addStudentList(studentList) {
     let counter = 1
+    let tableBody = document.getElementById('tableBody')
+    tableBody.innerHTML =''
     for (student of studentList) {
         addStudentToTable(counter++, student)
     }
@@ -122,10 +125,12 @@ function addStudentToTable(index, student) {
             deleteStudent(student.id)
        }
     })
-
     row.appendChild(button)
     row.appendChild(cell)
     row.appendChild(cell)
+    row.addEventListener('click',function(){
+        showStudentBox(student)
+    })
     tableBody.appendChild(row)
 }
 
@@ -134,7 +139,33 @@ document.getElementById('searchButton').addEventListener('click',()=>{
     console.log('id')
     fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`).then(response=>{
         return response.json()
-    }).then(student=>{
-        addStudentData(student)
+    }).then(student => {
+        showStudentBox(student)
     })
 })
+
+var singleStudentResults = document.getElementById('sinigle_student_result')
+var listStudentResults = document.getElementById('output')
+var addUserDetails = document.getElementById('addUserDetail')
+
+function hideAll(){
+    singleStudentResults.style.display='none'
+    listStudentResults.style.display='none'
+    addUserDetails.style.display='none'
+}
+document.getElementById('allStudentMenu').addEventListener('click',(event)=>{
+    hideAll()
+    listStudentResults.style.display='block'
+    showAllStudent()
+})
+document.getElementById('addStudentMenu').addEventListener('click',(event)=>{
+    hideAll()
+    addUserDetails.style.display='block'
+    
+})
+
+function showStudentBox(statusbar){
+    hideAll()
+    singleStudentResults.style.display = 'block'
+    addStudentData(statusbar)
+}
