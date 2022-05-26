@@ -107,19 +107,19 @@ function editInformation(student) {
     })
 }
 
-function editDataStudent(editStd) {
+function editStudentData(inforStudent) {
     hideAll()
     editDataStd.style.display = 'block'
-    document.getElementById('idEdit').value = editStd.id
-    document.getElementById('editName').value = editStd.name
-    document.getElementById('editSurname').value = editStd.surname
-    document.getElementById('editStudentId').value = editStd.studentId
-    document.getElementById('editGpa').value = editStd.gpa
-    document.getElementById('editImageLink').value = editStd.image
+    document.getElementById('idEdit').value = inforStudent.id
+    document.getElementById('editName').value = inforStudent.name
+    document.getElementById('editSurname').value = inforStudent.surname
+    document.getElementById('editStudentId').value = inforStudent.studentId
+    document.getElementById('editGpa').value = inforStudent.gpa
+    document.getElementById('editImageLink').value = inforStudent.image
 
 }
 
-function editDataStdClick() {
+function editButtonClick() {
     let student = {}
     student.id = document.getElementById('idEdit').value
     student.name = document.getElementById('editName').value
@@ -130,7 +130,7 @@ function editDataStdClick() {
     editInformation(student)
 }
 document.getElementById('editButton').addEventListener('click', function() {
-    editDataStdClick()
+    editButtonClick()
 })
 
 
@@ -168,7 +168,7 @@ function addStudentToTable(index, student) {
     button.addEventListener('click', function() {
         let conf = confirm(`ท่านต้องการแก้ไขคุณ ${student.name} หรือไม่`)
         if (conf) {
-            editDataStudent(student)
+            editStudentData(student)
         }
     })
     cell = document.createElement('td')
