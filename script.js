@@ -15,7 +15,6 @@
     // }
     //     deleteStudent()}
 function onLoad(){
-    
         hideAll()
 }
 function showAllStudent(){
@@ -33,7 +32,7 @@ function onAddStudentClick() {
     student.studentId = document.getElementById('studentIdInput').value
     student.gpa = document.getElementById('gpaInput').value
     student.image = document.getElementById('imageLinkInput').value
-    addStudentToDB('student')
+    addStudentToDB(student)
 }
 function addStudentList(studentList) {
     let counter = 1
@@ -88,7 +87,32 @@ function deleteStudent(id){
         }
     }).then(data =>{
         alert(`student name ${data.name} is now deleted`)
+        hideAll()
         showAllStudent()
+    })
+}
+document.getElementById('editButton').addEventListener('click',()=>{
+    let id = document.getElementById('inputText').value
+    console.log('id')
+    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`).then(response=>{
+        return response.json()
+    }).then(student => {
+        EditStudent(student)
+    })
+})
+
+function EditStudent(id){
+    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`,{
+        method: 'PUT'
+    }).then(response =>{
+        if(response.status === 200){
+            return response.json()
+        }else{
+            throw Error (response.statusText)
+        }
+    }).then(data =>{
+        alert(`student name ${data.name} is now UPDATE`)
+        showStudentBox(data)
     })
 }
 
@@ -109,30 +133,43 @@ function addStudentToTable(index, student) {
     someDiv.appendChild(imgElem)
     imgElem.setAttribute('src', student.image)
     imgElem.style.width = '150px'
+    imgElem.classList.add('img-thumbnail')
     row.appendChild(cell)
     cell = document.createElement('td')
-    cell.innerHTML = student.gender
+    cell.innerHTML = student.description
     row.appendChild(cell)
+
     cell = document.createElement('td')
     let button = document.createElement('button')
+    button.classList.add('btn')
+    button.classList.add('btn-warning')
     button.setAttribute('type', 'button')
+    button.innerText = 'Edit'
+    cell.appendChild(button)
+    row.appendChild(cell)
+    button.addEventListener('click', function() {
+        let conf = confirm(`ท่านต้องการแก้ไขคุณ ${student.name} หรือไม่`)
+        if (conf) {
+            editDataStudent(student)
+        }
+    })
+    cell = document.createElement('td')
+    button = document.createElement('button')
     button.classList.add('btn')
     button.classList.add('btn-danger')
-    button.innerText = 'delete'
-    button.addEventListener('click',function(){ 
-        let ok = confirm(`ท่านต้องการลบ ${student.name} หรือไม่`)
-       if(ok){
+    button.setAttribute('type', 'button')
+    button.innerText = 'Delete'
+    button.addEventListener('click', function() {
+        let cf = confirm(`ท่านต้องการลบคุณ ${student.name} หรือไม่`)
+        if (cf) {
             deleteStudent(student.id)
-       }
+        }
     })
-    row.appendChild(button)
+    cell.appendChild(button)
     row.appendChild(cell)
-    row.appendChild(cell)
-    row.addEventListener('click',function(){
-        showStudentBox(student)
-    })
     tableBody.appendChild(row)
 }
+
 
 document.getElementById('searchButton').addEventListener('click',()=>{
     let id = document.getElementById('inputText').value
@@ -147,11 +184,13 @@ document.getElementById('searchButton').addEventListener('click',()=>{
 var singleStudentResults = document.getElementById('sinigle_student_result')
 var listStudentResults = document.getElementById('output')
 var addUserDetails = document.getElementById('addUserDetail')
+var editUserDetails = document.getElementById('editUserDetail')
 
 function hideAll(){
     singleStudentResults.style.display='none'
     listStudentResults.style.display='none'
     addUserDetails.style.display='none'
+    editUserDetails .style.display='none'
 }
 document.getElementById('allStudentMenu').addEventListener('click',(event)=>{
     hideAll()
