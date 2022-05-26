@@ -85,36 +85,54 @@ function deleteStudent(id){
         }else{
             throw Error (response.statusText)
         }
-    }).then(data =>{
+    }).then(data => {
         alert(`student name ${data.name} is now deleted`)
-        hideAll()
+        showAllStudents()
+    }).catch(error => {
+        alert('your input student id is not in the database')
+    })
+}
+function editInformation(student) {
+    fetch('https://dv-student-backend-2019.appspot.com/students', {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(student)
+    }).then(response => {
+        return response.json()
+    }).then(data => {
+        console.log('success', data)
         showAllStudent()
     })
 }
-document.getElementById('editButton').addEventListener('click',()=>{
-    let id = document.getElementById('inputText').value
-    console.log('id')
-    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`).then(response=>{
-        return response.json()
-    }).then(student => {
-        EditStudent(student)
-    })
+
+function editDataStudent(editStd) {
+    hideAll()
+    editDataStd.style.display = 'block'
+    document.getElementById('idEdit').value = editStd.id
+    document.getElementById('editName').value = editStd.name
+    document.getElementById('editSurname').value = editStd.surname
+    document.getElementById('editStudentId').value = editStd.studentId
+    document.getElementById('editGpa').value = editStd.gpa
+    document.getElementById('editImageLink').value = editStd.image
+
+}
+
+function editDataStdClick() {
+    let student = {}
+    student.id = document.getElementById('idEdit').value
+    student.name = document.getElementById('editName').value
+    student.surname = document.getElementById('editSurname').value
+    student.studentId = document.getElementById('editStudentId').value
+    student.gpa = document.getElementById('editGpa').value
+    student.image = document.getElementById('editImageLink').value
+    editInformation(student)
+}
+document.getElementById('editButton').addEventListener('click', function() {
+    editDataStdClick()
 })
 
-function EditStudent(id){
-    fetch(`https://dv-student-backend-2019.appspot.com/student/${id}`,{
-        method: 'PUT'
-    }).then(response =>{
-        if(response.status === 200){
-            return response.json()
-        }else{
-            throw Error (response.statusText)
-        }
-    }).then(data =>{
-        alert(`student name ${data.name} is now UPDATE`)
-        showStudentBox(data)
-    })
-}
 
 function addStudentToTable(index, student) {
     const tableBody = document.getElementById('tableBody')
@@ -184,7 +202,7 @@ document.getElementById('searchButton').addEventListener('click',()=>{
 var singleStudentResults = document.getElementById('sinigle_student_result')
 var listStudentResults = document.getElementById('output')
 var addUserDetails = document.getElementById('addUserDetail')
-var editUserDetails = document.getElementById('editUserDetail')
+var editUserDetails = document.getElementById('editDataStd')
 
 function hideAll(){
     singleStudentResults.style.display='none'
