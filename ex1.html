@@ -23,9 +23,8 @@
       </a>
       <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
         <li><a href="#" class="nav-link px-2 link-dark " id="allStudentMenu" >รายชื่อทั้งหมด</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark "  id="searchMenu" >ค้นหา</a></li>
         <li><a href="#" class="nav-link px-2 link-dark "  id="addStudentMenu" >เพิ่มนักศึกษา</a></li>
-        <li><a href="#" class="nav-link px-2 link-dark ">Products</a></li>
+        <li><a href="#" class="nav-link px-2 link-dark " id="Edit">Products</a></li>
       </ul>
       
       
@@ -100,8 +99,10 @@
           <th scope="col">#</th>
           <th scope="col">ชื่อ</th>
           <th scope="col">รหัส</th>
-          <th scope="col">เพศ</th>
+          <th scope="col">เกรดเฉลี่ย</th>
           <th scope="col">ลบ</th>
+          <th scope="col"></th>
+          <th scope="col">แก้ไข</th>
         </tr>
       </thead>
       <tbody id="tableBody">
@@ -168,12 +169,38 @@
     </div>
     </form>
   </div>
-  
 </div>
 
 
-
-
+<div id="editDataStd">
+  <div class="d-flex justify-content-center my-3s">
+      <form class="row gy-2 gx-3 align-items-center">
+          <input type="hidden" id="idEdit">
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="editName" placeholder="ชื่อ">
+              <label for="nameInput">Name</label>
+          </div>
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="editSurname" placeholder="นามสกุล">
+              <label for="surnameInput">Surname</label>
+          </div>
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="editStudentId" placeholder="รหัสนักศึกษา">
+              <label for="studentIdInput">รหัสนักศึกษา</label>
+          </div>
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="editGpa" placeholder="gpa">
+              <label for="gpaInput">GPA</label>
+          </div>
+          <div class="form-floating mb-3">
+              <input type="text" class="form-control" id="editImageLink" placeholder="ชื่อ">
+              <label for="imageLinkInput">Link รูป</label>
+          </div>
+          <div class="col-auto">
+              <button type="button" class="btn btn-warning" id="editButton">Edit</button>
+          </div>
+      </form>
+  </div>
 
 
   <!-- Option 1: Bootstrap Bundle with Popper -->
